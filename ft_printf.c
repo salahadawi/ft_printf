@@ -31,12 +31,11 @@ int	ft_printf(const char *format, ...)
   return (0);
 }
 
-char **sort_flags(char *format)
+int	check_flags(char *format)
 {
-  char **flags;
-
-  if (!arr = (char**)malloc(sizeof(arr) * flags_amount
-  return (0);
+  while (*format)
+    if (*format == '%')
+      
 }
 
 int	flags_amount(char *str)
