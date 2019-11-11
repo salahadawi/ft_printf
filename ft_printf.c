@@ -14,62 +14,89 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include "libft/libft.h"
+#include "ft_printf.h"
 
-int	check_flag(char *str);
+int	handle_flags(const char **format, va_list *args);
 
 int	ft_printf(const char *format, ...)
 {
   va_list args;
-  int arg;
+  int amount;
 
-  va_start(args, format);
-  while (arg != 0)
-    {
-      arg = va_arg(args, int);
-      ft_putnbr(arg);
-    }
-  return (0);
-}
-
-int	check_flags(char *format)
-{
   while (*format)
-    if (*format == '%')
-      
-}
-
-int	flags_amount(char *str)
-{
-  int i;
-
-  i = 0;
-  while (*str)
     {
-      if (*str == '%')
-	if (*(str + 1) == '%')
-	  str++;
-	else if (*(str + 1) != '\0')
-	  i++;
-      str++;
+      if (*format == '%')
+	amount += handle_flags(&format, &args);
+      ft_putchar(*format++);
+      amount++;
     }
-  return (i);
+  return (amount);
 }
 
-int	check_flag(char *str)
+int	handle_flags(const char **format, va_list *args)
+{
+  char *flag;
+  int i;
+
+  i = 0;
+  if (*format[1] == '%')
+    {
+      format++;
+      return (0);
+    }
+  while (!ft_strchr("cspdiouxXf", *format[i]) && *format[i] != '\0')
+	 i++;
+  flag = ft_strsub(*format, 1, i);
+  if (check_flag(flag))
+    {
+      format += i;
+	return (print_flag(flag, args));
+    }
+  return (0);
+}
+
+int	print_flag(char *flag, va_list *args)
+{
+  
+}
+
+int	check_flag(char *flag)
 {
   int i;
 
   i = 0;
-  ft_putnbr(flags_amount(str));
+  while (strchr("#0-+ ", flag[i]))
+    i++;
+  while (ft_isdigit(flag[i]))
+    i++;
+  if (flag[i] == '.')
+    i++;
+  while (ft_isdigit(flag[i]))
+    i++;
+  if (flag[i] == 'h')
+    {
+      i++;
+      if (flag[i] == 'h')
+	i++;
+    }
+  else if (flag[i] == 'l')
+    {
+      i++;
+      if (flag[i] == 'l')
+	i++;
+    } 
+  else if (flag[i] == 'L')
+    i++;
+  if (ft_strchr("cspdiouxXf", flag[i]))
+    return (1);
   return (0);
-  
 }
 
 int	main(int argc, char **argv)
 {
   (void)argc;
-  check_flag(argv[1]);
-  ft_printf(argv[1], 5, 6, 7);
+  (void)argv;
+  ft_putnbr(check_flag(argv[1]));
   return (0);
 }
 
