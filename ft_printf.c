@@ -23,11 +23,13 @@ int	ft_printf(const char *format, ...)
   va_list args;
   int amount;
 
+  va_start(args, format);
   while (*format)
     {
       if (*format == '%')
 	amount += handle_flags(&format, &args);
-      ft_putchar(*format++);
+      if (*format)
+	ft_putchar(*format++);
       amount++;
     }
   return (amount);
@@ -39,17 +41,17 @@ int	handle_flags(const char **format, va_list *args)
   int i;
 
   i = 0;
-  if (*format[1] == '%')
+  if ((*format)[1] == '%')
     {
       format++;
       return (0);
     }
-  while (!ft_strchr("cspdiouxXf", *format[i]) && *format[i] != '\0')
+  while (!ft_strchr("cspdiouxXf", (*format)[i]) && (*format)[i] != '\0')
 	 i++;
   flag = ft_strsub(*format, 1, i);
   if (check_flag(flag))
     {
-      format += i;
+      *format += i + 1;
 	return (print_flag(flag, args));
     }
   return (0);
@@ -57,7 +59,14 @@ int	handle_flags(const char **format, va_list *args)
 
 int	print_flag(char *flag, va_list *args)
 {
+  int len;
+  char *str;
   
+  if (ft_strchr(flag, 's'))
+      str = ft_strdup(va_arg(*args, char*));
+  len = ft_strlen(str);
+  ft_putstr(str);
+  return (len);
 }
 
 int	check_flag(char *flag)
@@ -96,7 +105,7 @@ int	main(int argc, char **argv)
 {
   (void)argc;
   (void)argv;
-  ft_putnbr(check_flag(argv[1]));
+  ft_printf("test %s test", "hello");
   return (0);
 }
 
