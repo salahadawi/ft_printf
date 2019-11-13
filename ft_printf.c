@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/06 16:20:14 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/11/12 17:44:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_printf(const char *format, ...)
   va_list args;
   int amount;
 
+  amount = 0;
   va_start(args, format);
   while (*format)
     {
@@ -39,8 +40,10 @@ int	handle_flags(const char **format, va_list *args)
 {
   char *flag;
   int i;
+  int amount;
 
   i = 0;
+  amount = 0;
   if ((*format)[1] == '%')
     {
       format++;
@@ -52,9 +55,10 @@ int	handle_flags(const char **format, va_list *args)
   if (check_flag(flag))
     {
       *format += i + 1;
-	return (print_flag(flag, args));
+	amount = print_flag(flag, args);
     }
-  return (0);
+  free(flag);
+  return (amount);
 }
 
 int	print_flag(char *flag, va_list *args)
@@ -66,6 +70,7 @@ int	print_flag(char *flag, va_list *args)
       str = ft_strdup(va_arg(*args, char*));
   len = ft_strlen(str);
   ft_putstr(str);
+  free(str);
   return (len);
 }
 
@@ -106,6 +111,7 @@ int	main(int argc, char **argv)
   (void)argc;
   (void)argv;
   ft_printf("test %s test", "hello");
+  while(1);
   return (0);
 }
 
