@@ -178,7 +178,7 @@ int	check_flag(char *flag)
     return (1);
   return (0);
 }
-/*
+
 int	main(int argc, char **argv)
 {
   (void)argc;
@@ -186,5 +186,6 @@ int	main(int argc, char **argv)
   ft_putnbr(ft_printf("%hhu %s\n", 300, "test") - 1);
   return (0);
 }
-*/
+
+//implement ft_itoa_base, then print pointer adddress with %u
 //check if long and long long have a difference on mac
