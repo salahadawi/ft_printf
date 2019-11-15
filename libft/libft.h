@@ -154,4 +154,12 @@ void				ft_swap(int *a, int *b);
 
 void				ft_foreach(int *tab, int length, void(*f)(int));
 
+int					ft_longlen(long int nbr);
+
+void				ft_putlong(long int n);
+
+int					ft_ulonglen(unsigned long int nbr);
+
+void				ft_putulong(unsigned long int n);
+
 #endif

@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putulong.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/10/29 13:50:58 by sadawi           ###   ########.fr       */
+/*   Created: 2019/10/21 16:14:45 by sadawi            #+#    #+#             */
+/*   Updated: 2019/10/21 17:22:27 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-int	ft_printf(const char *format, ...);
+void	ft_putulong(unsigned long int n)
+{
+	int i;
+	int arr[22];
 
-int	handle_flags(const char **format, va_list *args);
-
-int	check_flag(char *flag);
-
-int	print_flag(char *flag, va_list *args);
-
-int	handle_signed(char *flag, va_list *args);
-
-int	handle_unsigned(char *flag, va_list *args);
-
-int	handle_pointer(char *flag, va_list *args);
-
-char	*toaddress(unsigned long n);
-
-#endif
+	i = 0;
+	if (n == 0)
+		ft_putchar('0');
+	while (n)
+	{
+		arr[i] = n % 10;
+		n /= 10;
+		i++;
+	}
+	i--;
+	while (i >= 0)
+		ft_putchar(arr[i--] + '0');
+}
