@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/10/29 13:50:58 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/11/28 17:12:38 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,13 @@ void				ft_putlong(long int n);
 int					ft_ulonglen(unsigned long int nbr);
 
 void				ft_putulong(unsigned long int n);
+
+char				*ft_itoa_base(long n, int base);
+
+char				*ft_itoa_base_low(long n, int base);
+
+char				*ft_itoa_base_ul(unsigned long n, int base);
+
+char				*ft_itoa_base_ul_low(unsigned long n, int base);
 
 #endif
