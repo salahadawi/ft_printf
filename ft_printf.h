@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/28 17:25:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/11/29 15:04:28 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		handle_unsigned(char *flag, va_list *args);
 int		handle_pointer(char *flag, va_list *args);
 
 int		handle_base(char *flag, va_list *args);
+
+int		handle_float(char *flag, va_list *args);
 
 char	*toaddress(unsigned long n);
 

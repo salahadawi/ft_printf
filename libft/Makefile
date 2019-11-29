@@ -6,7 +6,7 @@
 #    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 18:05:28 by sadawi            #+#    #+#              #
-#    Updated: 2019/11/28 17:13:43 by sadawi           ###   ########.fr        #
+#    Updated: 2019/11/29 15:53:49 by sadawi           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,7 +24,8 @@ ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c \
 ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c \
 ft_putlst.c ft_lstevery.c ft_strfill.c ft_strsplitlst.c ft_swap.c ft_longlen.c \
 ft_foreach.c ft_putlong.c ft_ulonglen.c ft_putulong.c ft_itoa_base.c \
-ft_itoa_base_low.c ft_itoa_base_ul.c ft_itoa_base_ul_low.c
+ft_itoa_base_low.c ft_itoa_base_ul.c ft_itoa_base_ul_low.c ft_putdouble.c \
+ft_itoa_double.c
 
 OBJS = *.o
 

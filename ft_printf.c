@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/28 18:34:02 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/11/29 16:05:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	print_flag(char *flag, va_list *args)
 {
 	int len;
 
-	len = 0; // remove later
 	if (!(len = handle_signed(flag, args)))
 		if (!(len = handle_unsigned(flag, args)))
 			if (!(len = handle_pointer(flag, args)))
 				if (!(len = handle_base(flag, args)))
-					return (0);
+					if (!(len = handle_float(flag, args)))
+						return (0);
 	return (len);
 }
 
@@ -153,13 +153,18 @@ int handle_base(char *flag, va_list *args)
 
 int	handle_float(char *flag, va_list *args)
 {
-	long double output;
+	char		*output;
+	long double tmp;
 	
 	if (ft_strstr(flag, "Lf"))
-		output = va_arg(*args, long double);
+		tmp = va_arg(*args, long double);
 	if (ft_strchr(flag, 'f'))
-		output = va_arg(*args, double);
-	return (0); //tmp
+		tmp = va_arg(*args, double);
+	else
+		return (0);
+	output = ft_itoa_double(tmp, 6);
+	ft_putstr(output);
+	return ((ft_strlen(output)));
 }
 
 int	handle_pointer(char *flag, va_list *args)
@@ -236,12 +241,13 @@ int	main(int argc, char **argv)
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%o %s\n", -555555555, "test") - 1);
+	ft_putnbr(ft_printf("%f %s\n", 5555.123456789, "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%.20f %s\n", 5555.123456789123456789, "test") - 1);
+	ft_putnbr(printf("%f %s\n", 5555.123456789, "test") - 1);
 	ft_putendl("");
 	return (0);
 }
 
-//implement f with flags l and L
-//need ft_putdouble function, and ft_doublelen.
+//change output in all handle functions to string, then handle precision first,
+// then width, then flags. 
+//implement flags, width and precision.
