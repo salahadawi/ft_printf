@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/29 16:05:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/11/29 17:53:13 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,22 @@ int	handle_signed(char *flag, va_list *args)
 
 int	handle_unsigned(char *flag, va_list *args)
 {
-	unsigned long	output;
+	char			*output;
+	unsigned long	tmp;
 
 	if (ft_strstr(flag, "hhu"))
-		output = (unsigned char)va_arg(*args, unsigned int);
+		tmp = (unsigned char)va_arg(*args, unsigned int);
 	else if (ft_strstr(flag, "hu"))
-		output = (unsigned short)va_arg(*args, unsigned int);
+		tmp = (unsigned short)va_arg(*args, unsigned int);
 	else if (ft_strstr(flag, "llu") || ft_strstr(flag, "lu"))
-		output = (unsigned long)va_arg(*args, unsigned long);
+		tmp = (unsigned long)va_arg(*args, unsigned long);
 	else if (ft_strchr(flag, 'u'))
-		output = (unsigned int)va_arg(*args, unsigned int);
+		tmp = (unsigned int)va_arg(*args, unsigned int);
 	else
 		return (0);
-	ft_putulong(output);
-	return (ft_ulonglen(output));
+	output = ft_itoa_base_ul(tmp, 10);
+	ft_putstr(output);
+	return (ft_strlen(output));
 }
 
 int handle_base(char *flag, va_list *args)
@@ -251,3 +253,5 @@ int	main(int argc, char **argv)
 //change output in all handle functions to string, then handle precision first,
 // then width, then flags. 
 //implement flags, width and precision.
+
+//change handle_signed and handle_unsigned to output string
