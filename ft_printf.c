@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 14:39:49 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 15:50:25 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,14 +244,14 @@ int	main(int argc, char **argv)
 	int a;
 	long double d;
 
-	d = 123456789.12345678912345;
+	d = 123456789;
 	a = 4;
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%.Lf %s\n", d, "test") - 1);
+	ft_putnbr(ft_printf("%Lf %s\n", d, "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%.Lf %s\n", d, "test") - 1);
+	ft_putnbr(printf("%Lf %s\n", d, "test") - 1);
 	ft_putendl("");
 	return (0);
 }
