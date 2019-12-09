@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 16:08:22 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 17:04:05 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ int	handle_signed(char *flag, va_list *args)
 		return (0);
 	if (!ft_strchr(flag, 'c'))
 		output = ft_itoa_base(tmp, 10);
-	ft_putstr(output);
-	return (ft_strlen(output));
+	return (handle_output(&output, flag));
 }
 
 int	handle_unsigned(char *flag, va_list *args)
@@ -117,8 +116,7 @@ int	handle_unsigned(char *flag, va_list *args)
 	else
 		return (0);
 	output = ft_itoa_base_ul(tmp, 10);
-	ft_putstr(output);
-	return (ft_strlen(output));
+	return (handle_output(&output, flag));
 }
 
 int	handle_base(char *flag, va_list *args)
@@ -148,8 +146,7 @@ int	handle_base(char *flag, va_list *args)
 		output = ft_itoa_base_ul(tmp, 16);
 	else
 		output = ft_itoa_base_ul_low(tmp, 8);
-	ft_putstr(output);
-	return (ft_strlen(output));
+	return (handle_output(&output, flag));
 }
 
 int	handle_float(char *flag, va_list *args)
@@ -169,15 +166,13 @@ int	handle_float(char *flag, va_list *args)
 	else
 		return (0);
 	output = ft_itoa_double(tmp, precision);
-	ft_putstr(output);
-	return ((ft_strlen(output)));
+	return (handle_output(&output, flag));
 }
 
 int	handle_pointer(char *flag, va_list *args)
 {
 	char			*output;
 	unsigned long	tmp;
-	int				len;
 
 	if (ft_strchr(flag, 's'))
 		output = ft_strdup(va_arg(*args, char*));
@@ -191,9 +186,7 @@ int	handle_pointer(char *flag, va_list *args)
 	if (ft_strchr(flag, '.'))
 		if ((int)ft_strlen(output) > ft_atoi(ft_strchr(flag, '.') + 1))
 			output[ft_atoi(ft_strchr(flag, '.') + 1)] = '\0';
-	ft_putstr(output);
-	len = ft_strlen(output);
-	return (len);
+	return (handle_output(&output, flag));
 }
 
 char	*toaddress(unsigned long n)
@@ -207,6 +200,43 @@ char	*toaddress(unsigned long n)
 	ft_strcat(address, tmp);
 	free(tmp);
 	return (address);
+}
+
+int		handle_output(char **output, char *flag)
+{
+	handle_flag(output, flag);
+	ft_putstr(*output);
+	return (ft_strlen(*output));
+}
+
+void	handle_flag(char **output, char *flag)
+{
+	handle_width(output, flag);
+}
+
+
+void	handle_width(char **output, char *flag)
+{
+	int i;
+	int width;
+	char *padding;
+	char *tmp;
+
+	i = 0;
+	width = 0;
+	while (strchr("#0-+ ", flag[i]))
+		i++;
+	if (ft_isdigit(flag[i]))
+		width = ft_atoi(flag + i);
+	if ((int)ft_strlen(*output) < width)
+	{
+		padding = ft_strnew(width - ft_strlen(*output));
+		ft_memset(padding, ' ', width - ft_strlen(*output));
+		tmp = *output;
+		*output = ft_strjoin(padding, *output);
+		free(tmp);
+		free(padding);
+	}
 }
 
 int	check_flag(char *flag)
@@ -252,9 +282,9 @@ int	main(int argc, char **argv)
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%.5s %s\n", "hello", "test") - 1);
+	ft_putnbr(ft_printf("%17c %s\n", 'a', "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%.5s %s\n", "hello", "test") - 1);
+	ft_putnbr(printf("%17c %s\n", 'a', "test") - 1);
 	ft_putendl("");
 	return (0);
 }
@@ -266,3 +296,5 @@ int	main(int argc, char **argv)
 //currently prints flag if flag is invalid, not sure if needs to be fixed
 //ulonglen and other similar functions may be unnecessary, delete once project is done
 // if true
+
+//maybe should delete unused functions from libft
