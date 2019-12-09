@@ -1,14 +1,24 @@
-//ADD HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ulonglen.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/09 15:53:11 by sadawi            #+#    #+#             */
+/*   Updated: 2019/12/09 15:54:20 by sadawi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_ulonglen(unsigned long int nbr)
+int	ft_ulonglen(unsigned long int nbr)
 {
-  int i;
+	int i;
 
-  i = 0;
-  while (nbr || i == 0)
-    {
-      nbr /= 10;
-      i++;
-    }
-  return (i);
+	i = 0;
+	while (nbr || i == 0)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
 }

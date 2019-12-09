@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 15:50:25 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 16:08:22 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int	handle_float(char *flag, va_list *args)
 
 int	handle_pointer(char *flag, va_list *args)
 {
-	void			*output;
+	char			*output;
 	unsigned long	tmp;
 	int				len;
 
@@ -188,6 +188,9 @@ int	handle_pointer(char *flag, va_list *args)
 	}
 	else
 		return (0);
+	if (ft_strchr(flag, '.'))
+		if ((int)ft_strlen(output) > ft_atoi(ft_strchr(flag, '.') + 1))
+			output[ft_atoi(ft_strchr(flag, '.') + 1)] = '\0';
 	ft_putstr(output);
 	len = ft_strlen(output);
 	return (len);
@@ -249,9 +252,9 @@ int	main(int argc, char **argv)
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%Lf %s\n", d, "test") - 1);
+	ft_putnbr(ft_printf("%.5s %s\n", "hello", "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%Lf %s\n", d, "test") - 1);
+	ft_putnbr(printf("%.5s %s\n", "hello", "test") - 1);
 	ft_putendl("");
 	return (0);
 }
@@ -261,3 +264,5 @@ int	main(int argc, char **argv)
 //implement flags, width and precision.
 
 //currently prints flag if flag is invalid, not sure if needs to be fixed
+//ulonglen and other similar functions may be unnecessary, delete once project is done
+// if true

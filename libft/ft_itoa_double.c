@@ -6,28 +6,28 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 16:14:45 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 15:48:55 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 15:56:07 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int  ft_doublelen(long n, int precision)
+static int	ft_doublelen(long n, int precision)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (n < 0)
-        i++;
-    while (n)
-    {
-        n /= 10;
-        i++;
-    }
-    return (i + precision + 1);
+	i = 0;
+	if (n < 0)
+		i++;
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i + precision + 1);
 }
 
-char	*ft_itoa_double(long double d, int precision)
+char		*ft_itoa_double(long double d, int precision)
 {
 	int		i;
 	char	*arr;
@@ -51,6 +51,6 @@ char	*ft_itoa_double(long double d, int precision)
 			ft_strcat(arr, "0");
 	}
 	d /= 10;
-		ft_strcat(arr, ft_itoa_base((long)d, 10));
+	ft_strcat(arr, ft_itoa_base((long)d, 10));
 	return (arr);
 }
