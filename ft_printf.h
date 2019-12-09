@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 18:07:16 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 19:29:41 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ void	handle_hashtag(char **output, char *flag);
 
 void	handle_plus(char **output, char *flag);
 
+void	handle_space(char **output, char *flag);
+
 void	handle_flag(char **output, char *flag);
 
 void	handle_width(char **output, char *flag);
+
+void	handle_zero(char **output, char *flag);
 
 #endif

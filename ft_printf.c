@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 18:12:48 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 19:31:20 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,15 @@ void	handle_flag(char **output, char *flag)
 		handle_hashtag(output, flag);
 	if (ft_strchr(flag, '+'))
 		handle_plus(output, flag);
-	handle_width(output, flag);
-	
+	else if (ft_strchr(flag, ' '))
+		handle_space(output, flag);
+	if (ft_strchr(flag, '0'))
+	{
+		if (!ft_strchr(flag, '-'))
+			handle_zero(output, flag);
+	}
+	else
+		handle_width(output, flag);
 }
 
 void	handle_hashtag(char **output, char *flag)
@@ -259,6 +266,24 @@ void	handle_plus(char **output, char *flag)
 		free(tmp);
 }
 
+void	handle_space(char **output, char *flag)
+{
+	char *tmp;
+
+	tmp = *output;
+	if (ft_atoi(*output))
+	{
+		if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
+			|| ft_strchr(flag, 'u'))
+		{
+			if (ft_atoi(*output) > 0)
+				*output = ft_strjoin(" ", *output);
+		}
+	}
+	if (!ft_strequ(*output, tmp))
+		free(tmp);
+}
+
 void	handle_width(char **output, char *flag)
 {
 	int i;
@@ -276,6 +301,33 @@ void	handle_width(char **output, char *flag)
 	{
 		padding = ft_strnew(width - ft_strlen(*output));
 		ft_memset(padding, ' ', width - ft_strlen(*output));
+		tmp = *output;
+		if (ft_strchr(flag, '-'))
+			*output = ft_strjoin(*output, padding);
+		else
+			*output = ft_strjoin(padding, *output);
+		free(tmp);
+		free(padding);
+	}
+}
+
+void	handle_zero(char **output, char *flag)
+{
+	int i;
+	int width;
+	char *padding;
+	char *tmp;
+
+	i = 0;
+	width = 0;
+	while (ft_strchr("#0-+ ", flag[i]))
+		i++;
+	if (ft_isdigit(flag[i]))
+		width = ft_atoi(flag + i);
+	if ((int)ft_strlen(*output) < width)
+	{
+		padding = ft_strnew(width - ft_strlen(*output));
+		ft_memset(padding, '0', width - ft_strlen(*output));
 		tmp = *output;
 		if (ft_strchr(flag, '-'))
 			*output = ft_strjoin(*output, padding);
@@ -323,7 +375,7 @@ int	main(int argc, char **argv)
 	int *ptr;
 	int a;
 	long double d;
-	signed int i;
+	unsigned int i;
 
 	i = 23;
 	d = 123456789;
@@ -331,9 +383,9 @@ int	main(int argc, char **argv)
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%+d %s\n", -123, "test") - 1);
+	ft_putnbr(ft_printf("%07s %s\n", "hello", "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%+d %s\n", -123, "test") - 1);
+	ft_putnbr(printf("%07s %s\n", "hello", "test") - 1);
 	ft_putendl("");
 	return (0);
 }
