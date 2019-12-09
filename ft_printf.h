@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 17:28:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 18:07:16 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*toaddress(unsigned long n);
 int		handle_output(char **output, char *flag);
 
 void	handle_hashtag(char **output, char *flag);
+
+void	handle_plus(char **output, char *flag);
 
 void	handle_flag(char **output, char *flag);
 

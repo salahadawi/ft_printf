@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 17:48:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 18:12:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,10 @@ int		handle_output(char **output, char *flag)
 
 void	handle_flag(char **output, char *flag)
 {
-	if (strchr(flag, '#'))
+	if (ft_strchr(flag, '#'))
 		handle_hashtag(output, flag);
+	if (ft_strchr(flag, '+'))
+		handle_plus(output, flag);
 	handle_width(output, flag);
 	
 }
@@ -239,6 +241,24 @@ void	handle_hashtag(char **output, char *flag)
 		free(tmp);
 }
 
+void	handle_plus(char **output, char *flag)
+{
+	char *tmp;
+
+	tmp = *output;
+	if (ft_atoi(*output))
+	{
+		if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
+			|| ft_strchr(flag, 'u'))
+		{
+			if (ft_atoi(*output) > 0)
+				*output = ft_strjoin("+", *output);
+		}
+	}
+	if (!ft_strequ(*output, tmp))
+		free(tmp);
+}
+
 void	handle_width(char **output, char *flag)
 {
 	int i;
@@ -248,7 +268,7 @@ void	handle_width(char **output, char *flag)
 
 	i = 0;
 	width = 0;
-	while (strchr("#0-+ ", flag[i]))
+	while (ft_strchr("#0-+ ", flag[i]))
 		i++;
 	if (ft_isdigit(flag[i]))
 		width = ft_atoi(flag + i);
@@ -257,7 +277,10 @@ void	handle_width(char **output, char *flag)
 		padding = ft_strnew(width - ft_strlen(*output));
 		ft_memset(padding, ' ', width - ft_strlen(*output));
 		tmp = *output;
-		*output = ft_strjoin(padding, *output);
+		if (ft_strchr(flag, '-'))
+			*output = ft_strjoin(*output, padding);
+		else
+			*output = ft_strjoin(padding, *output);
 		free(tmp);
 		free(padding);
 	}
@@ -268,7 +291,7 @@ int	check_flag(char *flag)
 	int i;
 
 	i = 0;
-	while (strchr("#0-+ ", flag[i]))
+	while (ft_strchr("#0-+ ", flag[i]))
 		i++;
 	while (ft_isdigit(flag[i]))
 		i++;
@@ -300,15 +323,17 @@ int	main(int argc, char **argv)
 	int *ptr;
 	int a;
 	long double d;
+	signed int i;
 
+	i = 23;
 	d = 123456789;
 	a = 4;
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%.Lf %s\n", d, "test") - 1);
+	ft_putnbr(ft_printf("%+d %s\n", -123, "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%.Lf %s\n", d, "test") - 1);
+	ft_putnbr(printf("%+d %s\n", -123, "test") - 1);
 	ft_putendl("");
 	return (0);
 }
