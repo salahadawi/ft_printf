@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 17:04:05 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 17:48:32 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ int	handle_base(char *flag, va_list *args)
 	else if (ft_strstr(flag, "lx") || ft_strstr(flag, "lX")
 			|| ft_strstr(flag, "lo"))
 		tmp = (long)va_arg(*args, unsigned long);
-	else if (ft_strchr(flag, 'x') || ft_strchr(flag, 'o'))
+	else if (ft_strchr(flag, 'x') || ft_strchr(flag, 'o')
+			|| ft_strstr(flag, "X"))
 		tmp = va_arg(*args, unsigned int);
 	else
 		return (0);
@@ -211,9 +212,32 @@ int		handle_output(char **output, char *flag)
 
 void	handle_flag(char **output, char *flag)
 {
+	if (strchr(flag, '#'))
+		handle_hashtag(output, flag);
 	handle_width(output, flag);
+	
 }
 
+void	handle_hashtag(char **output, char *flag)
+{
+	char *tmp;
+
+	tmp = *output;
+	if (ft_atoi(*output))
+	{
+		if (ft_strchr(flag, 'o'))
+		*output = ft_strjoin("0", *output);
+		else if (ft_strchr(flag, 'x'))
+			*output = ft_strjoin("0x", *output);
+		else if (ft_strchr(flag, 'X'))
+			*output = ft_strjoin("0X", *output);
+	}
+	if (ft_strchr(flag, 'f'))
+		if (!ft_strchr(*output, '.'))
+			*output = ft_strjoin(*output, ".");
+	if (!ft_strequ(*output, tmp))
+		free(tmp);
+}
 
 void	handle_width(char **output, char *flag)
 {
@@ -282,9 +306,9 @@ int	main(int argc, char **argv)
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%17c %s\n", 'a', "test") - 1);
+	ft_putnbr(ft_printf("%.Lf %s\n", d, "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%17c %s\n", 'a', "test") - 1);
+	ft_putnbr(printf("%.Lf %s\n", d, "test") - 1);
 	ft_putendl("");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/28 17:10:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 17:46:49 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_nbrlen_base(unsigned long n, int base)
 	i = 0;
 	if (n < 0)
 		i++;
-	while (n)
+	while (n || !i)
 	{
 		n /= base;
 		i++;

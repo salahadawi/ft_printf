@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 17:00:06 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 17:28:32 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		handle_float(char *flag, va_list *args);
 char	*toaddress(unsigned long n);
 
 int		handle_output(char **output, char *flag);
+
+void	handle_hashtag(char **output, char *flag);
 
 void	handle_flag(char **output, char *flag);
 
