@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/29 17:53:13 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 14:39:49 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,28 +78,27 @@ int	print_flag(char *flag, va_list *args)
 
 int	handle_signed(char *flag, va_list *args)
 {
-	long	output;
+	char	*output;
+	long	tmp;
 
 	if (ft_strchr(flag, 'c'))
-	{
-		output = va_arg(*args, int);
-		ft_putchar(output);
-	}
+		output = ft_chartostr(va_arg(*args, int));
 	else if (ft_strstr(flag, "hhi") || ft_strstr(flag, "hhd"))
-		output = (signed char)va_arg(*args, int);
+		tmp = (signed char)va_arg(*args, int);
 	else if (ft_strstr(flag, "hi") || ft_strstr(flag, "hd"))
-		output = (short)va_arg(*args, int);
+		tmp = (short)va_arg(*args, int);
 	else if (ft_strstr(flag, "lli") || ft_strstr(flag, "lld"))
-		output = (long)va_arg(*args, long);
+		tmp = (long)va_arg(*args, long);
 	else if (ft_strstr(flag, "li") || ft_strstr(flag, "ld"))
-		output = (long)va_arg(*args, long);
+		tmp = (long)va_arg(*args, long);
 	else if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i'))
-		output = va_arg(*args, int);
+		tmp = va_arg(*args, int);
 	else
 		return (0);
 	if (!ft_strchr(flag, 'c'))
-		ft_putlong(output);
-	return (ft_longlen(output));
+		output = ft_itoa_base(tmp, 10);
+	ft_putstr(output);
+	return (ft_strlen(output));
 }
 
 int	handle_unsigned(char *flag, va_list *args)
@@ -122,22 +121,22 @@ int	handle_unsigned(char *flag, va_list *args)
 	return (ft_strlen(output));
 }
 
-int handle_base(char *flag, va_list *args)
+int	handle_base(char *flag, va_list *args)
 {
 	char			*output;
 	unsigned long	tmp;
 
-	if (ft_strstr(flag, "hhx") || ft_strstr(flag, "hhX") 
+	if (ft_strstr(flag, "hhx") || ft_strstr(flag, "hhX")
 		|| ft_strstr(flag, "hho"))
 		tmp = (signed char)va_arg(*args, unsigned int);
-	else if (ft_strstr(flag, "hx") || ft_strstr(flag, "hX") 
-			 || ft_strstr(flag, "ho"))
+	else if (ft_strstr(flag, "hx") || ft_strstr(flag, "hX")
+			|| ft_strstr(flag, "ho"))
 		tmp = (short)va_arg(*args, unsigned int);
-	else if (ft_strstr(flag, "llx") || ft_strstr(flag, "llX") 
-			 || ft_strstr(flag, "llo"))
-		tmp = (long)va_arg(*args, unsigned long);	
-	else if (ft_strstr(flag, "lx") || ft_strstr(flag, "lX") 
-			 || ft_strstr(flag, "lo"))
+	else if (ft_strstr(flag, "llx") || ft_strstr(flag, "llX")
+			|| ft_strstr(flag, "llo"))
+		tmp = (long)va_arg(*args, unsigned long);
+	else if (ft_strstr(flag, "lx") || ft_strstr(flag, "lX")
+			|| ft_strstr(flag, "lo"))
 		tmp = (long)va_arg(*args, unsigned long);
 	else if (ft_strchr(flag, 'x') || ft_strchr(flag, 'o'))
 		tmp = va_arg(*args, unsigned int);
@@ -157,14 +156,19 @@ int	handle_float(char *flag, va_list *args)
 {
 	char		*output;
 	long double tmp;
-	
+	int			precision;
+
+	if (ft_strchr(flag, '.'))
+		precision = ft_atoi(ft_strchr(flag, '.') + 1);
+	else
+		precision = 6;
 	if (ft_strstr(flag, "Lf"))
 		tmp = va_arg(*args, long double);
-	if (ft_strchr(flag, 'f'))
+	else if (ft_strchr(flag, 'f'))
 		tmp = va_arg(*args, double);
 	else
 		return (0);
-	output = ft_itoa_double(tmp, 6);
+	output = ft_itoa_double(tmp, precision);
 	ft_putstr(output);
 	return ((ft_strlen(output)));
 }
@@ -238,20 +242,22 @@ int	main(int argc, char **argv)
 {
 	int *ptr;
 	int a;
+	long double d;
 
+	d = 123456789.12345678912345;
 	a = 4;
 	ptr = &a;
 	(void)argc;
 	(void)argv;
-	ft_putnbr(ft_printf("%f %s\n", 5555.123456789, "test") - 1);
+	ft_putnbr(ft_printf("%.Lf %s\n", d, "test") - 1);
 	ft_putendl("\n");
-	ft_putnbr(printf("%f %s\n", 5555.123456789, "test") - 1);
+	ft_putnbr(printf("%.Lf %s\n", d, "test") - 1);
 	ft_putendl("");
 	return (0);
 }
 
 //change output in all handle functions to string, then handle precision first,
-// then width, then flags. 
+// then width, then flags.
 //implement flags, width and precision.
 
-//change handle_signed and handle_unsigned to output string
+//currently prints flag if flag is invalid, not sure if needs to be fixed

@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 16:14:45 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/29 15:54:29 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 14:37:52 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*ft_itoa_double(long double d, int precision)
 	d -= (long)d;
 	if (d < 0)
 		d *= -1;
-	ft_strcat(arr, ".");
+	if (precision > 0)
+		ft_strcat(arr, ".");
 	while (precision-- >= 0)
 	{
 		d *= 10;

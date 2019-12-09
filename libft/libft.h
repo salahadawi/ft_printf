@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/11/29 15:53:26 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/09 13:24:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,7 @@ char				*ft_itoa_base_ul_low(unsigned long n, int base);
 void				ft_putdouble(long double d, int precision);
 
 char				*ft_itoa_double(long double d, int precision);
+
+char				*ft_chartostr(char c);
 
 #endif
