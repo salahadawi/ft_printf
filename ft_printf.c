@@ -6,16 +6,12 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 19:31:20 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/10 17:10:43 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdio.h> //tmp for printf
+#include "libft/libft.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -205,26 +201,37 @@ char	*toaddress(unsigned long n)
 
 int		handle_output(char **output, char *flag)
 {
+	int len;
+
 	handle_flag(output, flag);
 	ft_putstr(*output);
-	return (ft_strlen(*output));
+	len = ft_strlen(*output);
+	free(*output);
+	return (len);
 }
 
 void	handle_flag(char **output, char *flag)
 {
+	int i;
+
+	i = 0;
 	if (ft_strchr(flag, '#'))
 		handle_hashtag(output, flag);
 	if (ft_strchr(flag, '+'))
 		handle_plus(output, flag);
 	else if (ft_strchr(flag, ' '))
 		handle_space(output, flag);
-	if (ft_strchr(flag, '0'))
-	{
-		if (!ft_strchr(flag, '-'))
-			handle_zero(output, flag);
-	}
-	else
-		handle_width(output, flag);
+	while (flag[i])
+		if (ft_isdigit(flag[i++]))
+		{
+			if (flag[i - 1] == '0')
+			{
+				if (!ft_strchr(flag, '-'))
+					handle_zero(output, flag);
+			}
+			else
+				handle_width(output, flag);
+		}
 }
 
 void	handle_hashtag(char **output, char *flag)
@@ -370,26 +377,6 @@ int	check_flag(char *flag)
 	return (0);
 }
 
-int	main(int argc, char **argv)
-{
-	int *ptr;
-	int a;
-	long double d;
-	unsigned int i;
-
-	i = 23;
-	d = 123456789;
-	a = 4;
-	ptr = &a;
-	(void)argc;
-	(void)argv;
-	ft_putnbr(ft_printf("%07s %s\n", "hello", "test") - 1);
-	ft_putendl("\n");
-	ft_putnbr(printf("%07s %s\n", "hello", "test") - 1);
-	ft_putendl("");
-	return (0);
-}
-
 //change output in all handle functions to string, then handle precision first,
 // then width, then flags.
 //implement flags, width and precision.
@@ -399,3 +386,11 @@ int	main(int argc, char **argv)
 // if true
 
 //maybe should delete unused functions from libft
+
+// fix 
+// # 0040 (int)
+// ft_printf("%#08x", 42);
+// 1. (    8) -->00000x2a<--
+// 2. (    8) -->0x00002a<--
+// by implementing a check in handle_width to see if flag contains #, then if type is
+// o, x or X, then adding extra width after the prefix

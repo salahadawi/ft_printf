@@ -6,12 +6,15 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 19:29:41 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/10 15:01:23 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include <unistd.h>
+# include <stdarg.h>
+# include <stdlib.h>
 
 int		ft_printf(const char *format, ...);
 
