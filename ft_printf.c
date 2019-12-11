@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/10 17:10:43 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/11 14:27:31 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +75,9 @@ int		handle_output(char **output, char *flag)
 // 2. (    8) -->0x00002a<--
 // by implementing a check in handle_width to see if flag contains #, then if type is
 // o, x or X, then adding extra width after the prefix
+
+//precision needs to work with integers
+
+//char needs to print null character
+
+//precision .0 should not print anything when input is 0

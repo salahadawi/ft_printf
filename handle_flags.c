@@ -6,14 +6,14 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/10 17:10:43 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/10 17:33:31 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	handle_flags(const char **format, va_list *args)
+int		handle_flags(const char **format, va_list *args)
 {
 	char	*flag;
 	int		i;
@@ -38,7 +38,7 @@ int	handle_flags(const char **format, va_list *args)
 	return (amount - 1);
 }
 
-int	check_flag(char *flag)
+int		check_flag(char *flag)
 {
 	int i;
 
@@ -70,7 +70,7 @@ int	check_flag(char *flag)
 	return (0);
 }
 
-int	print_flag(char *flag, va_list *args)
+int		print_flag(char *flag, va_list *args)
 {
 	int len;
 
@@ -82,7 +82,6 @@ int	print_flag(char *flag, va_list *args)
 						return (0);
 	return (len);
 }
-
 
 void	handle_flag(char **output, char *flag)
 {

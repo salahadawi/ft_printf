@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/10 17:10:43 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/10 17:33:50 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_hashtag(char **output, char *flag)
 	if (ft_atoi(*output))
 	{
 		if (ft_strchr(flag, 'o'))
-		*output = ft_strjoin("0", *output);
+			*output = ft_strjoin("0", *output);
 		else if (ft_strchr(flag, 'x'))
 			*output = ft_strjoin("0x", *output);
 		else if (ft_strchr(flag, 'X'))
@@ -72,10 +72,10 @@ void	handle_space(char **output, char *flag)
 
 void	handle_width(char **output, char *flag)
 {
-	int i;
-	int width;
-	char *padding;
-	char *tmp;
+	int		i;
+	int		width;
+	char	*padding;
+	char	*tmp;
 
 	i = 0;
 	width = 0;
@@ -99,10 +99,10 @@ void	handle_width(char **output, char *flag)
 
 void	handle_zero(char **output, char *flag)
 {
-	int i;
-	int width;
-	char *padding;
-	char *tmp;
+	int		i;
+	int		width;
+	char	*padding;
+	char	*tmp;
 
 	i = 0;
 	width = 0;
