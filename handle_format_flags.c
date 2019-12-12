@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 14:09:26 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 15:38:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,11 @@ void	handle_plus(char **output, char *flag)
 	char *tmp;
 
 	tmp = *output;
-	if (ft_atoi(*output))
+	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
+		|| ft_strchr(flag, 'u'))
 	{
-		if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
-			|| ft_strchr(flag, 'u'))
-		{
-			if (ft_atoi(*output) > 0)
+			if (ft_atoi(*output) >= 0)
 				*output = ft_strjoin("+", *output);
-		}
 	}
 	if (!ft_strequ(*output, tmp))
 		free(tmp);
@@ -57,14 +54,11 @@ void	handle_space(char **output, char *flag)
 	char *tmp;
 
 	tmp = *output;
-	if (ft_atoi(*output))
+	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
+		|| ft_strchr(flag, 'u'))
 	{
-		if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
-			|| ft_strchr(flag, 'u'))
-		{
-			if (ft_atoi(*output) > 0)
-				*output = ft_strjoin(" ", *output);
-		}
+		if (ft_atoi(*output) >= 0)
+			*output = ft_strjoin(" ", *output);
 	}
 	if (!ft_strequ(*output, tmp))
 		free(tmp);
@@ -83,6 +77,7 @@ void	handle_width(char **output, char *flag)
 		i++;
 	if (ft_isdigit(flag[i]))
 		width = ft_atoi(flag + i);
+	width = handle_char_width(output, flag, width);
 	if ((int)ft_strlen(*output) < width)
 	{
 		padding = ft_strnew(width - ft_strlen(*output));
@@ -110,6 +105,7 @@ void	handle_zero(char **output, char *flag)
 		i++;
 	if (ft_isdigit(flag[i]))
 		width = ft_atoi(flag + i);
+	width = handle_char_width(output, flag, width);
 	if ((int)ft_strlen(*output) < width)
 	{
 		padding = ft_strnew(width - ft_strlen(*output));
@@ -136,6 +132,8 @@ void	handle_precision(char **output, char *flag)
 	if (!flag_integer(flag))
 		return ;
 	precision = ft_atoi(ft_strchr(flag, '.') + 1);
+	if (!precision && !ft_atoi(*output))
+		ft_strclr(*output);
 	if ((int)ft_strlen(*output) < precision)
 	{
 		padding = ft_strnew(precision - ft_strlen(*output));

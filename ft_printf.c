@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/11 14:27:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 15:41:17 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,40 @@ int		handle_output(char **output, char *flag)
 	int len;
 
 	handle_flag(output, flag);
-	ft_putstr(*output);
-	len = ft_strlen(*output);
+	if (ft_strchr(flag, 'c'))
+		len = handle_char_output(output, flag);
+	else
+	{
+		ft_putstr(*output);
+		len = ft_strlen(*output);
+	}
 	free(*output);
 	return (len);
+}
+
+int		handle_char_output(char **output, char *flag)
+{
+	int width;
+	int i;
+
+	i = 0;
+	width = 1;
+	while (ft_strchr("#0-+ ", flag[i]))
+        i++;
+    if (ft_isdigit(flag[i]))
+        width = ft_atoi(flag + i);
+	i = 0;
+	while (width > i)
+		ft_putchar((*output)[i++]);
+	return (width);
+}
+
+int		handle_char_width(char **output, char *flag, int width)
+{
+	if (ft_strchr(flag, 'c'))
+		if (!(**output) && width > 1)
+			return (--width);
+	return (width);
 }
 
 //change output in all handle functions to string, then handle precision first,
@@ -76,8 +106,8 @@ int		handle_output(char **output, char *flag)
 // by implementing a check in handle_width to see if flag contains #, then if type is
 // o, x or X, then adding extra width after the prefix
 
-//precision needs to work with integers
+//DONE precision needs to work with integers
 
 //char needs to print null character
 
-//precision .0 should not print anything when input is 0
+// DONE precision .0 should not print anything when input is 0
