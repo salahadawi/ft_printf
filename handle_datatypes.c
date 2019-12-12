@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 16:38:47 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:15:09 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,17 @@ int	handle_pointer(char *flag, va_list *args)
 		tmp = va_arg(*args, unsigned long);
 		output = toaddress(tmp);
 	}
+	else
+		return (0);
+	return (handle_output(&output, flag));
+}
+
+int	handle_percent(char *flag)
+{
+	char	*output;
+
+	if (ft_strchr(flag, '%'))
+		output = ft_strdup("%");
 	else
 		return (0);
 	return (handle_output(&output, flag));

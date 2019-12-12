@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 15:37:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:12:50 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		handle_pointer(char *flag, va_list *args);
 int		handle_base(char *flag, va_list *args);
 
 int		handle_float(char *flag, va_list *args);
+
+int		handle_percent(char *flag);
 
 char	*toaddress(unsigned long n);
 

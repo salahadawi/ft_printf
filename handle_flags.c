@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 16:58:05 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:29:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@ int		handle_flags(const char **format, va_list *args)
 	int		i;
 	int		amount;
 
-	i = 0;
+	i = 1;
 	amount = 0;
-	if ((*format)[1] == '%')
-	{
-		format++;
-		return (0);
-	}
-	while (!ft_strchr("cspdiouxXf", (*format)[i]) && (*format)[i] != '\0')
+	while (!ft_strchr("cspdiouxXf%", (*format)[i]) && (*format)[i] != '\0')
 		i++;
 	flag = ft_strsub(*format, 1, i);
 	if (check_flag(flag))
@@ -65,7 +60,7 @@ int		check_flag(char *flag)
 	}
 	else if (flag[i] == 'L')
 		i++;
-	if (ft_strchr("cspdiouxXf", flag[i]))
+	if (ft_strchr("cspdiouxXf%", flag[i]))
 		return (1);
 	return (0);
 }
@@ -79,7 +74,8 @@ int		print_flag(char *flag, va_list *args)
 			if (!(len = handle_pointer(flag, args)))
 				if (!(len = handle_base(flag, args)))
 					if (!(len = handle_float(flag, args)))
-						return (0);
+						if (!(len = handle_percent(flag)))
+							return (0);
 	return (len);
 }
 
