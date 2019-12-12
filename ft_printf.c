@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 18:15:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:37:52 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	while (*format)
 	{
-		//if (*format == '%' && format[1] == '%')
-		//	ft_putchar(*format++);
 		if (*format == '%')
 			amount += handle_flags(&format, &args);
 		else

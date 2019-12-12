@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 18:12:50 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:55:54 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	handle_width(char **output, char *flag);
 int		handle_char_width(char **output, char *flag, int width);
 
 void	handle_zero(char **output, char *flag);
+
+void	add_width(char **output, char *flag, char *padding);
 
 int		flag_integer(char *flag);
 
