@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/10 17:10:43 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 13:52:09 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,5 @@ int	handle_pointer(char *flag, va_list *args)
 	}
 	else
 		return (0);
-	if (ft_strchr(flag, '.'))
-		if ((int)ft_strlen(output) > ft_atoi(ft_strchr(flag, '.') + 1))
-			output[ft_atoi(ft_strchr(flag, '.') + 1)] = '\0';
 	return (handle_output(&output, flag));
 }

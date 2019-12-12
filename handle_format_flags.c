@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/10 17:33:50 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 14:09:26 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,29 @@ void	handle_zero(char **output, char *flag)
 			*output = ft_strjoin(*output, padding);
 		else
 			*output = ft_strjoin(padding, *output);
+		free(tmp);
+		free(padding);
+	}
+}
+
+void	handle_precision(char **output, char *flag)
+{
+	char	*padding;
+	char	*tmp;
+	int		precision;
+
+	if (ft_strchr(flag, 's') || ft_strchr(flag, 'p'))
+		if ((int)ft_strlen(*output) > ft_atoi(ft_strchr(flag, '.') + 1))
+			(*output)[ft_atoi(ft_strchr(flag, '.') + 1)] = '\0';
+	if (!flag_integer(flag))
+		return ;
+	precision = ft_atoi(ft_strchr(flag, '.') + 1);
+	if ((int)ft_strlen(*output) < precision)
+	{
+		padding = ft_strnew(precision - ft_strlen(*output));
+		ft_memset(padding, '0', precision - ft_strlen(*output));
+		tmp = *output;
+		*output = ft_strjoin(padding, *output);
 		free(tmp);
 		free(padding);
 	}

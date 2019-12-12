@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/10 17:33:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 14:05:57 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	handle_flag(char **output, char *flag)
 	int i;
 
 	i = 0;
+	if (ft_strchr(flag, '.'))
+		handle_precision(output, flag);
 	if (ft_strchr(flag, '#'))
 		handle_hashtag(output, flag);
 	if (ft_strchr(flag, '+'))
@@ -105,4 +107,21 @@ void	handle_flag(char **output, char *flag)
 			else
 				handle_width(output, flag);
 		}
+}
+
+int		flag_integer(char *flag)
+{
+	if (ft_strchr(flag, 'd'))
+		return (1);
+	if (ft_strchr(flag, 'i'))
+		return (1);
+	if (ft_strchr(flag, 'o'))
+		return (1);
+	if (ft_strchr(flag, 'u'))
+		return (1);
+	if (ft_strchr(flag, 'x'))
+		return (1);
+	if (ft_strchr(flag, 'X'))
+		return (1);
+	return (0);
 }
