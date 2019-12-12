@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 15:38:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 17:04:42 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +19,12 @@ void	handle_hashtag(char **output, char *flag)
 	char *tmp;
 
 	tmp = *output;
-	if (ft_atoi(*output))
-	{
+	if (!(*output)[0] || (*output)[0] != '0')
 		if (ft_strchr(flag, 'o'))
 			*output = ft_strjoin("0", *output);
-		else if (ft_strchr(flag, 'x'))
+	if (ft_atoi(*output))
+	{
+		if (ft_strchr(flag, 'x'))
 			*output = ft_strjoin("0x", *output);
 		else if (ft_strchr(flag, 'X'))
 			*output = ft_strjoin("0X", *output);

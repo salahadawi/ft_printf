@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 13:52:09 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/12 16:38:47 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,11 @@ int	handle_pointer(char *flag, va_list *args)
 	unsigned long	tmp;
 
 	if (ft_strchr(flag, 's'))
+	{
 		output = ft_strdup(va_arg(*args, char*));
+		if (!output)
+			output = ft_strdup("(null)");
+	}
 	else if (ft_strchr(flag, 'p'))
 	{
 		tmp = va_arg(*args, unsigned long);
