@@ -41,7 +41,7 @@ char		*ft_itoa_double(long double d, int precision)
 		d *= -1;
 	if (precision > 0)
 		ft_strcat(arr, ".");
-	while (precision-- >= 0)
+	while (precision-- > 0)
 	{
 		d *= 10;
 		if (precision == -1)
