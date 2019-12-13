@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 18:15:09 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/13 14:27:16 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,7 @@ int	handle_base(char *flag, va_list *args)
 	char			*output;
 	unsigned long	tmp;
 
-	if (ft_strstr(flag, "hhx") || ft_strstr(flag, "hhX")
-		|| ft_strstr(flag, "hho"))
-		tmp = (signed char)va_arg(*args, unsigned int);
-	else if (ft_strstr(flag, "hx") || ft_strstr(flag, "hX")
-			|| ft_strstr(flag, "ho"))
-		tmp = (short)va_arg(*args, unsigned int);
-	else if (ft_strstr(flag, "llx") || ft_strstr(flag, "llX")
+	if (ft_strstr(flag, "llx") || ft_strstr(flag, "llX")
 			|| ft_strstr(flag, "llo"))
 		tmp = (long)va_arg(*args, unsigned long);
 	else if (ft_strstr(flag, "lx") || ft_strstr(flag, "lX")

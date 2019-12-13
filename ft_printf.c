@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 18:37:52 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/13 13:39:08 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*toaddress(unsigned long n)
 
 	address = (char*)malloc(15);
 	ft_strcpy(address, "0x");
-	tmp = ft_itoa_base_ul(n, 16);
+	tmp = ft_itoa_base_ul_low(n, 16);
 	ft_strcat(address, tmp);
 	free(tmp);
 	return (address);

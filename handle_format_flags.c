@@ -7,7 +7,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/12 19:05:30 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/13 14:29:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_hashtag(char **output, char *flag)
 	if (!(*output)[0] || (*output)[0] != '0')
 		if (ft_strchr(flag, 'o'))
 			*output = ft_strjoin("0", *output);
-	if (ft_atoi(*output))
+	if (!ft_strequ(*output, "0"))
 	{
 		if (ft_strchr(flag, 'x'))
 			*output = ft_strjoin("0x", *output);
@@ -44,7 +44,7 @@ void	handle_plus(char **output, char *flag)
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
 		|| ft_strchr(flag, 'u'))
 	{
-			if (ft_atoi(*output) >= 0)
+		if ((*output)[0] != '-')
 				*output = ft_strjoin("+", *output);
 	}
 	if (!ft_strequ(*output, tmp))
@@ -59,7 +59,7 @@ void	handle_space(char **output, char *flag)
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
 		|| ft_strchr(flag, 'u'))
 	{
-		if (ft_atoi(*output) >= 0)
+		if ((*output)[0] != '-')
 			*output = ft_strjoin(" ", *output);
 	}
 	if (!ft_strequ(*output, tmp))
@@ -103,6 +103,8 @@ void	handle_zero(char **output, char *flag)
 
 	i = 0;
 	width = 0;
+	if (ft_strchr(flag, '.') && flag_integer(flag))
+		return ;
 	while (ft_strchr("#0-+ ", flag[i]))
 		i++;
 	if (ft_isdigit(flag[i]))
@@ -127,13 +129,13 @@ void	handle_precision(char **output, char *flag)
 	int		len;
 
 	len = ft_strlen(*output);
-	if (ft_atoi(*output) < 0)
-		len--;
 	if (ft_strchr(flag, 's') || ft_strchr(flag, 'p'))
 		if (len > ft_atoi(ft_strchr(flag, '.') + 1))
 			(*output)[ft_atoi(ft_strchr(flag, '.') + 1)] = '\0';
 	if (!flag_integer(flag))
 		return ;
+	if ((*output)[0] == '-')
+		len--;
 	precision = ft_atoi(ft_strchr(flag, '.') + 1);
 	if (!precision && !ft_atoi(*output))
 		ft_strclr(*output);
@@ -151,8 +153,9 @@ void	handle_precision(char **output, char *flag)
 void	add_width(char **output, char *flag, char *padding)
 {
 	int i;
+	char *start;
+	char *end;
 	char *tmp;
-	char *tmp2;
 
 	i = 0;
 	if (!flag_integer(flag))
@@ -161,10 +164,11 @@ void	add_width(char **output, char *flag, char *padding)
 		i++;
 	if ((*output)[i] == 'x' || (*output)[i] == 'X')
 		i++;
-	tmp = ft_strsub(*output, 0, i);
-	tmp2 = ft_strsub(*output, i, ft_strlen(*output) - i);
-	*output = ft_strjoin(tmp, padding);
-	*output = ft_strjoin(*output, tmp2);
+	start = ft_strsub(*output, 0, i);
+	end = ft_strsub(*output, i, ft_strlen(*output) - i);
+	tmp = ft_strjoin(start, padding);
+	*output = ft_strjoin(tmp, end);
 	free(tmp);
-	free(tmp2);
+	free(start);
+	free(end);
 }
