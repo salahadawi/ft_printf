@@ -7,7 +7,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/17 18:14:00 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:40:53 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ void	handle_width(char **output, char *flag)
 		padding = ft_strnew(width - ft_strlen(*output));
 		ft_memset(padding, ' ', width - ft_strlen(*output));
 		tmp = *output;
-		if (ft_strchr(flag, '-'))
+		if (ft_strchr(flag, '-') && ft_strchr(flag, 'c') && !(*output)[0])
+		{
+			*output = ft_strjoin("a", padding);
+			(*output)[0] = '\0';
+		}
+		else if (ft_strchr(flag, '-'))
 			*output = ft_strjoin(*output, padding);
 		else
 			*output = ft_strjoin(padding, *output);
