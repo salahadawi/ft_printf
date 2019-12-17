@@ -7,7 +7,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/13 14:29:37 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/16 14:07:44 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	handle_space(char **output, char *flag)
 
 	tmp = *output;
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
-		|| ft_strchr(flag, 'u'))
+		|| ft_strchr(flag, 'u') || ft_strchr(flag, 'f'))
 	{
 		if ((*output)[0] != '-')
 			*output = ft_strjoin(" ", *output);
