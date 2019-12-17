@@ -7,7 +7,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/16 14:07:44 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/17 17:04:20 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,23 @@ void	handle_hashtag(char **output, char *flag)
 	if (!(*output)[0] || (*output)[0] != '0')
 		if (ft_strchr(flag, 'o'))
 			*output = ft_strjoin("0", *output);
-	if (!ft_strequ(*output, "0"))
+	if ((*output)[0] != '0')
 	{
-		if (ft_strchr(flag, 'x'))
-			*output = ft_strjoin("0x", *output);
-		else if (ft_strchr(flag, 'X'))
-			*output = ft_strjoin("0X", *output);
+		if (ft_strchr(flag, '.'))
+		{
+			if ((*ft_strchr(flag, '.') + 1 != '0') && ft_isdigit(*ft_strchr(flag, '.') + 1))
+			{
+				if (ft_strchr(flag, 'x'))
+					*output = ft_strjoin("0x", *output);
+				else if (ft_strchr(flag, 'X'))
+					*output = ft_strjoin("0X", *output);
+			}
+		}
+			else
+				if (ft_strchr(flag, 'x'))
+					*output = ft_strjoin("0x", *output);
+				else if (ft_strchr(flag, 'X'))
+					*output = ft_strjoin("0X", *output);
 	}
 	if (ft_strchr(flag, 'f'))
 		if (!ft_strchr(*output, '.'))
@@ -42,7 +53,7 @@ void	handle_plus(char **output, char *flag)
 
 	tmp = *output;
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
-		|| ft_strchr(flag, 'u'))
+		|| ft_strchr(flag, 'f'))
 	{
 		if ((*output)[0] != '-')
 				*output = ft_strjoin("+", *output);
@@ -57,7 +68,7 @@ void	handle_space(char **output, char *flag)
 
 	tmp = *output;
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
-		|| ft_strchr(flag, 'u') || ft_strchr(flag, 'f'))
+		|| ft_strchr(flag, 'f'))
 	{
 		if ((*output)[0] != '-')
 			*output = ft_strjoin(" ", *output);
