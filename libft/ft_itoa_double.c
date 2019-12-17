@@ -6,13 +6,12 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 16:14:45 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/13 19:02:30 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/17 16:26:34 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static int	ft_doublelen(long n, int precision)
 {
@@ -29,36 +28,55 @@ static int	ft_doublelen(long n, int precision)
 	return (i + precision + 1);
 }
 
-static void	handle_rounding(char **arr, long double *d)
+static int	ft_ulonglen(unsigned long n)
 {
-	int len;
-	long dlen;
-	char *tmp;
+	int i;
 
-	dlen = ft_doublelen((long)*d, 0);
-	*d += 10;
-	if (dlen != ft_doublelen((long)*d, 0))
+	i = 0;
+	while (n || !i)
 	{
-		len = 1;
-		while (ft_doublelen((long)*d, 0) != ft_doublelen(len, 0))
-			len *= 10;
-		*d -= len;
-		tmp = *arr;
-		*arr = ft_itoa_base(ft_atoi(*arr) + 1, 10);
-		if (ft_strchr(tmp, '.'))
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+static int	power_10(int power)
+{
+	int i;
+
+	i = 10;
+	while (power-- > 1)
+		i *= 10;
+	return (i);
+}
+
+static void	handle_rounding(unsigned long *n, long double *d, int precision)
+{
+	int i;
+	int len;
+
+	i = 0;
+	while (i++ < precision)
+		*d *= 10;
+	if (((unsigned long)(*d * 10) % 10) > 4)
+	{
+		len = ft_ulonglen((unsigned long)*d);
+		(*d)++;
+		if ((ft_ulonglen((unsigned long)*d) != len &&
+			(unsigned long)*d % power_10(precision) == 0) || !precision)
 		{
-			*arr = ft_strjoin(*arr, ft_strchr(tmp, '.'));
-			while ((long)ft_strlen(ft_strchr(*arr, '.')) < dlen - 2)
-				ft_strcat(*arr, "0");
-		}		
-		free(tmp);
+			(*n)++;
+			*d = 0;
+		}
 	}
 }
 
 char		*ft_itoa_double(long double d, int precision)
 {
-	int		i;
-	char	*arr;
+	int				i;
+	unsigned long	n;
+	char			*arr;
 
 	i = ft_doublelen(d, precision);
 	if (!(arr = ft_strnew(i)))
@@ -68,21 +86,17 @@ char		*ft_itoa_double(long double d, int precision)
 		ft_strcpy(arr, "-");
 		d *= -1;
 	}
-	ft_strcat(arr, ft_itoa_base((long)d, 10));
-	d -= (long)d;
+	n = (unsigned long)d;
+	d -= (unsigned long)d;
+	handle_rounding(&n, &d, precision);
+	ft_strcat(arr, ft_itoa_base_ul(n, 10));
 	if (precision > 0)
-		ft_strcat(arr, ".");
-	while (precision-- >= 0)
 	{
-		d *= 10;
-		if (precision == -1)
-			if (((long)d % 10) > 4)
-				handle_rounding(&arr, &d);
-		if (!(long)d && precision > 0)
+		ft_strcat(arr, ".");
+		precision -= ft_ulonglen((unsigned long)d);
+		while (precision-- > 0)
 			ft_strcat(arr, "0");
+		ft_strcat(arr, ft_itoa_base_ul((unsigned long)d, 10));
 	}
-	d /= 10;
-	if (ft_strchr(arr, '.'))
-		ft_strcat(arr, ft_itoa_base((long)d, 10));
 	return (arr);
 }

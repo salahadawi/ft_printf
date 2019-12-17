@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/09 13:24:24 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/17 15:29:39 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,6 @@ void				ft_foreach(int *tab, int length, void(*f)(int));
 int					ft_longlen(long int nbr);
 
 void				ft_putlong(long int n);
-
-int					ft_ulonglen(unsigned long int nbr);
 
 void				ft_putulong(unsigned long int n);
 
