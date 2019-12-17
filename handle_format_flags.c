@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/17 18:40:53 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:48:33 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +33,13 @@ void	handle_hashtag(char **output, char *flag)
 					*output = ft_strjoin("0X", *output);
 			}
 		}
-			else
-				if (ft_strchr(flag, 'x'))
-					*output = ft_strjoin("0x", *output);
-				else if (ft_strchr(flag, 'X'))
-					*output = ft_strjoin("0X", *output);
+		else
+		{
+			if (ft_strchr(flag, 'x'))
+				*output = ft_strjoin("0x", *output);
+			else if (ft_strchr(flag, 'X'))
+				*output = ft_strjoin("0X", *output);
+		}
 	}
 	if (ft_strchr(flag, 'f'))
 		if (!ft_strchr(*output, '.'))
@@ -56,7 +57,7 @@ void	handle_plus(char **output, char *flag)
 		|| ft_strchr(flag, 'f'))
 	{
 		if ((*output)[0] != '-')
-				*output = ft_strjoin("+", *output);
+			*output = ft_strjoin("+", *output);
 	}
 	if (!ft_strequ(*output, tmp))
 		free(tmp);
@@ -168,10 +169,10 @@ void	handle_precision(char **output, char *flag)
 
 void	add_width(char **output, char *flag, char *padding)
 {
-	int i;
-	char *start;
-	char *end;
-	char *tmp;
+	int		i;
+	char	*start;
+	char	*end;
+	char	*tmp;
 
 	i = 0;
 	if (!flag_integer(flag))
