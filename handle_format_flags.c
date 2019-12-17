@@ -7,7 +7,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/17 17:04:20 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:14:00 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,8 @@ void	add_width(char **output, char *flag, char *padding)
 	i = 0;
 	if (!flag_integer(flag))
 		*output = ft_strjoin(padding, *output);
-	if ((*output)[i] == '+' || (*output)[i] == '-' || (*output)[i] == '0')
+	if ((*output)[i] == '+' || (*output)[i] == '-' || (*output)[i] == ' '
+		|| (*output)[i] == '0')
 		i++;
 	if ((*output)[i] == 'x' || (*output)[i] == 'X')
 		i++;
