@@ -119,12 +119,6 @@ void	add_width(char **output, char *flag, char *padding)
 	free_two(&start, &end);
 }
 
-void	handle_char_minus(char **output, char *padding)
-{
-	*output = ft_strjoin("a", padding);
-	(*output)[0] = '\0';
-}
-
 void	free_two(char **s1, char **s2)
 {
 	free(*s1);
