@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/17 18:48:33 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:19:20 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,7 @@ void	handle_hashtag(char **output, char *flag)
 		if (ft_strchr(flag, 'o'))
 			*output = ft_strjoin("0", *output);
 	if ((*output)[0] != '0')
-	{
-		if (ft_strchr(flag, '.'))
-		{
-			if ((*ft_strchr(flag, '.') + 1 != '0') && ft_isdigit(*ft_strchr(flag, '.') + 1))
-			{
-				if (ft_strchr(flag, 'x'))
-					*output = ft_strjoin("0x", *output);
-				else if (ft_strchr(flag, 'X'))
-					*output = ft_strjoin("0X", *output);
-			}
-		}
-		else
-		{
-			if (ft_strchr(flag, 'x'))
-				*output = ft_strjoin("0x", *output);
-			else if (ft_strchr(flag, 'X'))
-				*output = ft_strjoin("0X", *output);
-		}
-	}
+		handle_hex_precision(output, flag);
 	if (ft_strchr(flag, 'f'))
 		if (!ft_strchr(*output, '.'))
 			*output = ft_strjoin(*output, ".");
@@ -76,4 +58,26 @@ void	handle_space(char **output, char *flag)
 	}
 	if (!ft_strequ(*output, tmp))
 		free(tmp);
+}
+
+void	handle_hex_precision(char **output, char *flag)
+{
+	if (ft_strchr(flag, '.'))
+	{
+		if ((*ft_strchr(flag, '.') + 1 != '0')
+			&& ft_isdigit(*ft_strchr(flag, '.') + 1))
+		{
+			if (ft_strchr(flag, 'x'))
+				*output = ft_strjoin("0x", *output);
+			else if (ft_strchr(flag, 'X'))
+				*output = ft_strjoin("0X", *output);
+		}
+	}
+	else
+	{
+		if (ft_strchr(flag, 'x'))
+			*output = ft_strjoin("0x", *output);
+		else if (ft_strchr(flag, 'X'))
+			*output = ft_strjoin("0X", *output);
+	}
 }

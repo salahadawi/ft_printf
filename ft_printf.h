@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/18 13:26:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:18:31 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int		check_flag_thrice(char *flag, char *s1, char *s2, char *s3);
 void	handle_char_minus(char **output, char *padding);
 
 void	free_two(char **s1, char **s2);
+
+void	handle_hex_precision(char **output, char *flag);
 
 #endif
