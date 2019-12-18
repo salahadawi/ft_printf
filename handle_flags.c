@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/13 14:01:25 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:15:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,13 @@ int		check_flag(char *flag)
 	while (ft_isdigit(flag[i]))
 		i++;
 	if (flag[i] == 'h')
-	{
 		i++;
-		if (flag[i] == 'h')
-			i++;
-	}
-	else if (flag[i] == 'l')
-	{
+	if (flag[i] == 'h')
 		i++;
-		if (flag[i] == 'l')
-			i++;
-	}
+	if (flag[i] == 'l')
+		i++;
+	if (flag[i] == 'l')
+		i++;
 	else if (flag[i] == 'L')
 		i++;
 	if (ft_strchr("cspdiouxXf%", flag[i]))

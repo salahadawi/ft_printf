@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/17 18:48:33 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:25:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,12 @@ void	handle_width(char **output, char *flag)
 		ft_memset(padding, ' ', width - ft_strlen(*output));
 		tmp = *output;
 		if (ft_strchr(flag, '-') && ft_strchr(flag, 'c') && !(*output)[0])
-		{
-			*output = ft_strjoin("a", padding);
-			(*output)[0] = '\0';
-		}
+			handle_char_minus(output, padding);
 		else if (ft_strchr(flag, '-'))
 			*output = ft_strjoin(*output, padding);
 		else
 			*output = ft_strjoin(padding, *output);
-		free(tmp);
-		free(padding);
+		free_two(&tmp, &padding);
 	}
 }
 
@@ -68,8 +64,7 @@ void	handle_zero(char **output, char *flag)
 		ft_memset(padding, '0', width - ft_strlen(*output));
 		tmp = *output;
 		add_width(output, flag, padding);
-		free(tmp);
-		free(padding);
+		free_two(&tmp, &padding);
 	}
 }
 
@@ -97,8 +92,7 @@ void	handle_precision(char **output, char *flag)
 		ft_memset(padding, '0', precision - len);
 		tmp = *output;
 		add_width(output, flag, padding);
-		free(tmp);
-		free(padding);
+		free_two(&tmp, &padding);
 	}
 }
 
@@ -122,6 +116,17 @@ void	add_width(char **output, char *flag, char *padding)
 	tmp = ft_strjoin(start, padding);
 	*output = ft_strjoin(tmp, end);
 	free(tmp);
-	free(start);
-	free(end);
+	free_two(&start, &end);
+}
+
+void	handle_char_minus(char **output, char *padding)
+{
+	*output = ft_strjoin("a", padding);
+	(*output)[0] = '\0';
+}
+
+void	free_two(char **s1, char **s2)
+{
+	free(*s1);
+	free(*s2);
 }

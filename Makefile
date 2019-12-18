@@ -6,13 +6,14 @@
 #    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 18:05:28 by sadawi            #+#    #+#              #
-#    Updated: 2019/12/10 17:29:22 by sadawi           ###   ########.fr        #
+#    Updated: 2019/12/18 13:05:12 by sadawi           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c handle_datatypes.c handle_flags.c handle_format_flags.c
+SRCS = ft_printf.c handle_digit_datatypes.c handle_string_datatypes.c \
+handle_flags.c handle_format_flags.c handle_width.c
 
 OBJS = *.o
 
