@@ -70,3 +70,8 @@ int	handle_percent(char *flag)
 		return (0);
 	return (handle_output(&output, flag));
 }
+
+int check_flag_thrice(char *flag, char *s1, char *s2, char *s3)
+{
+    return (ft_strstr(flag, s1) || ft_strstr(flag, s2) || ft_strstr(flag, s3));
+}
