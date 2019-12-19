@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/18 13:12:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:29:06 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	handle_percent(char *flag)
 	return (handle_output(&output, flag));
 }
 
-int check_flag_thrice(char *flag, char *s1, char *s2, char *s3)
+int	check_flag_thrice(char *flag, char *s1, char *s2, char *s3)
 {
-    return (ft_strstr(flag, s1) || ft_strstr(flag, s2) || ft_strstr(flag, s3));
+	return (ft_strstr(flag, s1) || ft_strstr(flag, s2) || ft_strstr(flag, s3));
 }
