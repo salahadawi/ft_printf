@@ -30,4 +30,10 @@ Everything else was coded entirely from scratch.
 
 Format syntax:
 
-```%[parameter][flags][width][.precision][length]type```
+```
+%[parameter][flags][width][.precision][length]type
+```
+
+# Usage
+
+
