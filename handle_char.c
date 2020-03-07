@@ -13,6 +13,8 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
+extern char *g_output;
+
 void	handle_char_minus(char **output, char *padding)
 {
 	*output = ft_strjoin("a", padding);
@@ -39,7 +41,17 @@ int		handle_char_output(char **output, char *flag)
 	if (ft_isdigit(flag[i]))
 		width = ft_atoi(flag + i);
 	i = 0;
-	while (width > i)
-		ft_putchar((*output)[i++]);
+	if (!g_output)
+		while (width > i)
+			ft_putchar((*output)[i++]);
+	else
+	{
+		g_output = ft_strnew(width);
+		while (width > i)
+		{
+			g_output[i] = (*output)[i];
+			i++;
+		}
+	}
 	return (width);
 }

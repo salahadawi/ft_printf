@@ -18,6 +18,10 @@
 
 int		ft_printf(const char *format, ...);
 
+int		ft_fprintf(int fd, const char *format, ...);
+
+char	*ft_sprintf(const char *format, ...);
+
 int		handle_flags(const char **format, va_list *args);
 
 int		check_flag(char *flag);

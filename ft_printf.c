@@ -13,11 +13,55 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
+int g_fd;
+char *g_output;
+
+int		ft_fprintf(int fd, const char *format, ...)
+{
+	va_list	args;
+	int		amount;
+
+	g_fd = fd;
+	g_output = NULL;
+	amount = 0;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+			amount += handle_flags(&format, &args);
+		else
+			ft_putchar(*format);
+		format++;
+		amount++;
+	}
+	return (amount);
+}
+
+char*	ft_sprintf(const char *format, ...)
+{
+	va_list	args;
+
+	g_fd = 1;
+	g_output = "";
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+			handle_flags(&format, &args);
+		else
+			ft_putchar(*format);
+		format++;
+	}
+	return (g_output);
+}
+
 int		ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		amount;
 
+	g_fd = 1;
+	g_output = NULL;
 	amount = 0;
 	va_start(args, format);
 	while (*format)
@@ -54,7 +98,10 @@ int		handle_output(char **output, char *flag)
 		len = handle_char_output(output, flag);
 	else
 	{
-		ft_putstr(*output);
+		if (!g_output)
+			ft_putstr_fd(*output, g_fd);
+		else
+			g_output = ft_strdup(*output);
 		len = ft_strlen(*output);
 	}
 	free(*output);
