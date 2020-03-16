@@ -13,6 +13,25 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
+int		ft_fprintf(int fd, const char *format, ...)
+{
+	va_list	args;
+	int		amount;
+
+	amount = 0;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+			amount += handle_flags(&format, &args, fd);
+		else
+			ft_putchar_fd(*format, fd);
+		format++;
+		amount++;
+	}
+	return (amount);
+}
+
 int		ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -23,7 +42,7 @@ int		ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-			amount += handle_flags(&format, &args);
+			amount += handle_flags(&format, &args, 1);
 		else
 			ft_putchar(*format);
 		format++;
@@ -45,16 +64,16 @@ char	*toaddress(unsigned long n)
 	return (address);
 }
 
-int		handle_output(char **output, char *flag)
+int		handle_output(char **output, char *flag, int fd)
 {
 	int len;
 
 	handle_flag(output, flag);
 	if (ft_strchr(flag, 'c'))
-		len = handle_char_output(output, flag);
+		len = handle_char_output(output, flag, fd);
 	else
 	{
-		ft_putstr(*output);
+		ft_putstr_fd(*output, fd);
 		len = ft_strlen(*output);
 	}
 	free(*output);

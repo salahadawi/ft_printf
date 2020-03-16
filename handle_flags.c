@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int		handle_flags(const char **format, va_list *args)
+int		handle_flags(const char **format, va_list *args, int fd)
 {
 	char	*flag;
 	int		i;
@@ -29,7 +29,7 @@ int		handle_flags(const char **format, va_list *args)
 	if (check_flag(flag))
 	{
 		*format += i;
-		amount = print_flag(flag, args);
+		amount = print_flag(flag, args, fd);
 	}
 	free(flag);
 	return (amount - 1);
@@ -63,16 +63,16 @@ int		check_flag(char *flag)
 	return (0);
 }
 
-int		print_flag(char *flag, va_list *args)
+int		print_flag(char *flag, va_list *args, int fd)
 {
 	int len;
 
-	if (!(len = handle_signed(flag, args)))
-		if (!(len = handle_unsigned(flag, args)))
-			if (!(len = handle_pointer(flag, args)))
-				if (!(len = handle_base(flag, args)))
-					if (!(len = handle_float(flag, args)))
-						if (!(len = handle_percent(flag)))
+	if (!(len = handle_signed(flag, args, fd)))
+		if (!(len = handle_unsigned(flag, args, fd)))
+			if (!(len = handle_pointer(flag, args, fd)))
+				if (!(len = handle_base(flag, args, fd)))
+					if (!(len = handle_float(flag, args, fd)))
+						if (!(len = handle_percent(flag, fd)))
 							return (0);
 	return (len);
 }

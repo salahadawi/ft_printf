@@ -18,29 +18,31 @@
 
 int		ft_printf(const char *format, ...);
 
-int		handle_flags(const char **format, va_list *args);
+int		ft_fprintf(int fd, const char *format, ...);
+
+int		handle_flags(const char **format, va_list *args, int fd);
 
 int		check_flag(char *flag);
 
-int		print_flag(char *flag, va_list *args);
+int		print_flag(char *flag, va_list *args, int fd);
 
-int		handle_signed(char *flag, va_list *args);
+int		handle_signed(char *flag, va_list *args, int fd);
 
-int		handle_unsigned(char *flag, va_list *args);
+int		handle_unsigned(char *flag, va_list *args, int fd);
 
-int		handle_pointer(char *flag, va_list *args);
+int		handle_pointer(char *flag, va_list *args, int fd);
 
-int		handle_base(char *flag, va_list *args);
+int		handle_base(char *flag, va_list *args, int fd);
 
-int		handle_float(char *flag, va_list *args);
+int		handle_float(char *flag, va_list *args, int fd);
 
-int		handle_percent(char *flag);
+int		handle_percent(char *flag, int fd);
 
 char	*toaddress(unsigned long n);
 
-int		handle_output(char **output, char *flag);
+int		handle_output(char **output, char *flag, int fd);
 
-int		handle_char_output(char **output, char *flag);
+int		handle_char_output(char **output, char *flag, int fd);
 
 void	handle_precision(char **output, char *flag);
 

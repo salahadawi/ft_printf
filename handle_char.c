@@ -27,7 +27,7 @@ int		handle_char_width(char **output, char *flag, int width)
 	return (width);
 }
 
-int		handle_char_output(char **output, char *flag)
+int		handle_char_output(char **output, char *flag, int fd)
 {
 	int width;
 	int i;
@@ -40,6 +40,6 @@ int		handle_char_output(char **output, char *flag)
 		width = ft_atoi(flag + i);
 	i = 0;
 	while (width > i)
-		ft_putchar((*output)[i++]);
+		ft_putchar_fd((*output)[i++], fd);
 	return (width);
 }
