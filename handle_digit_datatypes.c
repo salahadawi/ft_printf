@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	handle_signed(char *flag, va_list *args, int fd)
+int	handle_signed(char *flag, va_list *args, t_data *data)
 {
 	char	*output;
 	long	tmp;
@@ -34,10 +34,10 @@ int	handle_signed(char *flag, va_list *args, int fd)
 		return (0);
 	if (!ft_strchr(flag, 'c'))
 		output = ft_itoa_base(tmp, 10);
-	return (handle_output(&output, flag, fd));
+	return (handle_output(&output, flag, data));
 }
 
-int	handle_unsigned(char *flag, va_list *args, int fd)
+int	handle_unsigned(char *flag, va_list *args, t_data *data)
 {
 	char			*output;
 	unsigned long	tmp;
@@ -53,10 +53,10 @@ int	handle_unsigned(char *flag, va_list *args, int fd)
 	else
 		return (0);
 	output = ft_itoa_base_ul(tmp, 10);
-	return (handle_output(&output, flag, fd));
+	return (handle_output(&output, flag, data));
 }
 
-int	handle_float(char *flag, va_list *args, int fd)
+int	handle_float(char *flag, va_list *args, t_data *data)
 {
 	char		*output;
 	long double tmp;
@@ -73,5 +73,5 @@ int	handle_float(char *flag, va_list *args, int fd)
 	else
 		return (0);
 	output = ft_itoa_double(tmp, precision);
-	return (handle_output(&output, flag, fd));
+	return (handle_output(&output, flag, data));
 }

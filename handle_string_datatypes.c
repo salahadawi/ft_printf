@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	handle_base(char *flag, va_list *args, int fd)
+int	handle_base(char *flag, va_list *args, t_data *data)
 {
 	char			*output;
 	unsigned long	tmp;
@@ -36,10 +36,10 @@ int	handle_base(char *flag, va_list *args, int fd)
 		output = ft_itoa_base_ul(tmp, 16);
 	else
 		output = ft_itoa_base_ul_low(tmp, 8);
-	return (handle_output(&output, flag, fd));
+	return (handle_output(&output, flag, data));
 }
 
-int	handle_pointer(char *flag, va_list *args, int fd)
+int	handle_pointer(char *flag, va_list *args, t_data *data)
 {
 	char			*output;
 	unsigned long	tmp;
@@ -57,10 +57,10 @@ int	handle_pointer(char *flag, va_list *args, int fd)
 	}
 	else
 		return (0);
-	return (handle_output(&output, flag, fd));
+	return (handle_output(&output, flag, data));
 }
 
-int	handle_percent(char *flag, int fd)
+int	handle_percent(char *flag, t_data *data)
 {
 	char	*output;
 
@@ -68,7 +68,7 @@ int	handle_percent(char *flag, int fd)
 		output = ft_strdup("%");
 	else
 		return (0);
-	return (handle_output(&output, flag, fd));
+	return (handle_output(&output, flag, data));
 }
 
 int	check_flag_thrice(char *flag, char *s1, char *s2, char *s3)

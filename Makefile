@@ -13,7 +13,7 @@
 NAME = libftprintf.a
 
 SRCS = ft_printf.c handle_digit_datatypes.c handle_string_datatypes.c \
-handle_flags.c handle_format_flags.c handle_width.c handle_char.c
+handle_flags.c handle_format_flags.c handle_width.c handle_char.c handle_data.c
 
 OBJS = *.o
 

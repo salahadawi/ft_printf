@@ -13,41 +13,73 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
+/*
+	ft_fprintf prints to specified file descriptor.
+*/
+
 int		ft_fprintf(int fd, const char *format, ...)
 {
 	va_list	args;
-	int		amount;
+	t_data *data;
+	int amount;
 
 	amount = 0;
+	init_data(&data);
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format == '%')
-			amount += handle_flags(&format, &args, fd);
+			amount += handle_flags(&format, &args, data);
 		else
-			ft_putchar_fd(*format, fd);
+			data->output = join_char_to_str(data->output, *format);
 		format++;
 		amount++;
 	}
+	write(fd, data->output, ft_strlen(data->output));
 	return (amount);
+}
+
+/*
+	ft_sprintf returns the string instead of printing.
+*/
+
+char	*ft_sprintf(const char *format, ...)
+{
+	va_list	args;
+	t_data *data;
+
+	init_data(&data);
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+			handle_flags(&format, &args, data);
+		else
+			data->output = join_char_to_str(data->output, *format);
+		format++;
+	}
+	return (data->output);
 }
 
 int		ft_printf(const char *format, ...)
 {
 	va_list	args;
+	t_data *data;
 	int		amount;
 
 	amount = 0;
+	init_data(&data);
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format == '%')
-			amount += handle_flags(&format, &args, 1);
+			amount += handle_flags(&format, &args, data);
 		else
-			ft_putchar(*format);
+			data->output = join_char_to_str(data->output, *format);
 		format++;
 		amount++;
 	}
+	write(1, data->output, ft_strlen(data->output));
 	return (amount);
 }
 
@@ -64,18 +96,17 @@ char	*toaddress(unsigned long n)
 	return (address);
 }
 
-int		handle_output(char **output, char *flag, int fd)
+int		handle_output(char **output, char *flag, t_data *data)
 {
 	int len;
 
 	handle_flag(output, flag);
 	if (ft_strchr(flag, 'c'))
-		len = handle_char_output(output, flag, fd);
+		len = handle_char_output(output, flag, data);
 	else
 	{
-		ft_putstr_fd(*output, fd);
 		len = ft_strlen(*output);
+		data->output = ft_strjoinfree(data->output, *output);
 	}
-	free(*output);
 	return (len);
 }

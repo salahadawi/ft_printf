@@ -13,14 +13,13 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int		handle_flags(const char **format, va_list *args, int fd)
+int		handle_flags(const char **format, va_list *args, t_data *data)
 {
 	char	*flag;
 	int		i;
 	int		amount;
 
 	i = 1;
-	amount = 0;
 	while (!ft_strchr("cspdiouxXf%", (*format)[i]) && (*format)[i] != '\0')
 		i++;
 	if (!(*format)[i])
@@ -29,7 +28,7 @@ int		handle_flags(const char **format, va_list *args, int fd)
 	if (check_flag(flag))
 	{
 		*format += i;
-		amount = print_flag(flag, args, fd);
+		amount = print_flag(flag, args, data);
 	}
 	free(flag);
 	return (amount - 1);
@@ -63,16 +62,16 @@ int		check_flag(char *flag)
 	return (0);
 }
 
-int		print_flag(char *flag, va_list *args, int fd)
+int		print_flag(char *flag, va_list *args, t_data *data)
 {
-	int len;
+	int	len;
 
-	if (!(len = handle_signed(flag, args, fd)))
-		if (!(len = handle_unsigned(flag, args, fd)))
-			if (!(len = handle_pointer(flag, args, fd)))
-				if (!(len = handle_base(flag, args, fd)))
-					if (!(len = handle_float(flag, args, fd)))
-						if (!(len = handle_percent(flag, fd)))
+	if (!(len = handle_signed(flag, args, data)))
+		if (!(len = handle_unsigned(flag, args, data)))
+			if (!(len = handle_pointer(flag, args, data)))
+				if (!(len = handle_base(flag, args, data)))
+					if (!(len = handle_float(flag, args, data)))
+						if (!(len = handle_percent(flag, data)))
 							return (0);
 	return (len);
 }
