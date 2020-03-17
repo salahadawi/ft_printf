@@ -25,7 +25,7 @@ ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c \
 ft_putlst.c ft_lstevery.c ft_strfill.c ft_strsplitlst.c ft_swap.c ft_longlen.c \
 ft_foreach.c ft_putlong.c ft_ulonglen.c ft_putulong.c ft_itoa_base.c \
 ft_itoa_base_low.c ft_itoa_base_ul.c ft_itoa_base_ul_low.c ft_putdouble.c \
-ft_itoa_double.c ft_chartostr.c
+ft_itoa_double.c ft_chartostr.c ft_strjoinfree.c
 
 OBJS = *.o
 

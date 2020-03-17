@@ -174,4 +174,6 @@ char				*ft_itoa_double(long double d, int precision);
 
 char				*ft_chartostr(char c);
 
+char				*ft_strjoinfree(char *s1, char *s2);
+
 #endif
