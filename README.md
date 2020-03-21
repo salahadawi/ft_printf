@@ -34,6 +34,10 @@ Format syntax:
 %[parameter][flags][width][.precision][length]type
 ```
 
-# Usage
+# Bonus
+
+* ```ft_fprintf``` Prints to specified file descriptor.
+
+* ```ft_sprintf``` Returns the string instead of printing.
 
 
