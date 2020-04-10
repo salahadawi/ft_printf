@@ -6,12 +6,12 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/03/21 15:35:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/10 20:31:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 t_data	*join_data(t_data *data1, t_data *data2)
 {
