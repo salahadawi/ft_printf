@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/18 14:18:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:12:55 by vkuikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ int				check_flag(char *flag);
 
 int				print_flag(char *flag, va_list *args, t_data *data);
 
-int				handle_signed(char *flag, va_list *args, t_data *data);
+int				handle_signed(char *flag, va_list *args, t_data *data, int *len);
 
-int				handle_unsigned(char *flag, va_list *args, t_data *data);
+int				handle_unsigned(char *flag, va_list *args, t_data *data, int *len);
 
-int				handle_pointer(char *flag, va_list *args, t_data *data);
+int				handle_pointer(char *flag, va_list *args, t_data *data, int *len);
 
-int				handle_base(char *flag, va_list *args, t_data *data);
+int				handle_base(char *flag, va_list *args, t_data *data, int *len);
 
-int				handle_float(char *flag, va_list *args, t_data *data);
+int				handle_float(char *flag, va_list *args, t_data *data, int *len);
 
-int				handle_percent(char *flag, t_data *data);
+int				handle_percent(char *flag, t_data *data, int *len);
 
 char			*toaddress(unsigned long n);
 
