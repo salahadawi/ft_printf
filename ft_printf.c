@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/12 20:48:09 by sadawi           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:25:54 by vkuikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **	ft_fprintf prints to specified file descriptor.
 */
 
-int		ft_fprintf(int fd, const char *format, ...)
+int	ft_fprintf(int fd, const char *format, ...)
 {
 	va_list	args;
 	t_data	*data;
@@ -66,7 +66,7 @@ char	*ft_sprintf(const char *format, ...)
 	return (output);
 }
 
-int		ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	t_data	*data;
@@ -92,10 +92,10 @@ int		ft_printf(const char *format, ...)
 
 char	*toaddress(unsigned long n)
 {
-	char *address;
-	char *tmp;
+	char	*address;
+	char	*tmp;
 
-	address = (char*)ft_memalloc(15);
+	address = (char *)ft_memalloc(15);
 	ft_strcpy(address, "0x");
 	tmp = ft_itoa_base_ul_low(n, 16);
 	ft_strcat(address, tmp);
@@ -103,9 +103,9 @@ char	*toaddress(unsigned long n)
 	return (address);
 }
 
-int		handle_output(char **output, char *flag, t_data *data)
+int	handle_output(char **output, char *flag, t_data *data)
 {
-	int len;
+	int	len;
 
 	handle_flag(output, flag);
 	if (ft_strchr(flag, 'c'))

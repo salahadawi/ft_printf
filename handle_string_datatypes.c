@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   handle_string_datatypes.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/10 20:31:45 by sadawi           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:28:51 by vkuikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	handle_base(char *flag, va_list *args, t_data *data)
+int	handle_base(char *flag, va_list *args, t_data *data, int *len)
 {
 	char			*output;
 	unsigned long	tmp;
@@ -36,17 +36,20 @@ int	handle_base(char *flag, va_list *args, t_data *data)
 		output = ft_itoa_base_ul(tmp, 16);
 	else
 		output = ft_itoa_base_ul_low(tmp, 8);
-	return (handle_output(&output, flag, data));
+	if (!len)
+		return (0);
+	*len = handle_output(&output, flag, data);
+	return (*len);
 }
 
-int	handle_pointer(char *flag, va_list *args, t_data *data)
+int	handle_pointer(char *flag, va_list *args, t_data *data, int *len)
 {
 	char			*output;
 	unsigned long	tmp;
 
 	if (ft_strchr(flag, 's'))
 	{
-		output = ft_strdup(va_arg(*args, char*));
+		output = ft_strdup(va_arg(*args, char *));
 		if (!output)
 			output = ft_strdup("(null)");
 	}
@@ -57,10 +60,13 @@ int	handle_pointer(char *flag, va_list *args, t_data *data)
 	}
 	else
 		return (0);
-	return (handle_output(&output, flag, data));
+	if (!len)
+		return (0);
+	*len = handle_output(&output, flag, data);
+	return (*len);
 }
 
-int	handle_percent(char *flag, t_data *data)
+int	handle_percent(char *flag, t_data *data, int *len)
 {
 	char	*output;
 
@@ -68,7 +74,10 @@ int	handle_percent(char *flag, t_data *data)
 		output = ft_strdup("%");
 	else
 		return (0);
-	return (handle_output(&output, flag, data));
+	if (!len)
+		return (0);
+	*len = handle_output(&output, flag, data);
+	return (*len);
 }
 
 int	check_flag_thrice(char *flag, char *s1, char *s2, char *s3)

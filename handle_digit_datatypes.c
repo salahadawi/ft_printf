@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   handle_digit_datatypes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/10 20:31:27 by sadawi           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:27:04 by vkuikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	handle_signed(char *flag, va_list *args, t_data *data)
+int	handle_signed(char *flag, va_list *args, t_data *data, int *len)
 {
 	char	*output;
 	long	tmp;
@@ -34,10 +34,13 @@ int	handle_signed(char *flag, va_list *args, t_data *data)
 		return (0);
 	if (!ft_strchr(flag, 'c'))
 		output = ft_itoa_base(tmp, 10);
-	return (handle_output(&output, flag, data));
+	if (!len)
+		return (0);
+	*len = handle_output(&output, flag, data);
+	return (*len);
 }
 
-int	handle_unsigned(char *flag, va_list *args, t_data *data)
+int	handle_unsigned(char *flag, va_list *args, t_data *data, int *len)
 {
 	char			*output;
 	unsigned long	tmp;
@@ -53,13 +56,16 @@ int	handle_unsigned(char *flag, va_list *args, t_data *data)
 	else
 		return (0);
 	output = ft_itoa_base_ul(tmp, 10);
-	return (handle_output(&output, flag, data));
+	if (!len)
+		return (0);
+	*len = handle_output(&output, flag, data);
+	return (*len);
 }
 
-int	handle_float(char *flag, va_list *args, t_data *data)
+int	handle_float(char *flag, va_list *args, t_data *data, int *len)
 {
 	char		*output;
-	long double tmp;
+	long double	tmp;
 	int			precision;
 
 	if (ft_strchr(flag, '.'))
@@ -73,5 +79,8 @@ int	handle_float(char *flag, va_list *args, t_data *data)
 	else
 		return (0);
 	output = ft_itoa_double(tmp, precision);
-	return (handle_output(&output, flag, data));
+	if (!len)
+		return (0);
+	*len = handle_output(&output, flag, data);
+	return (*len);
 }

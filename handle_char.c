@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/10 20:31:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:26:09 by vkuikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_char_minus(char **output, char *padding)
 	(*output)[0] = '\0';
 }
 
-int		handle_char_width(char **output, char *flag, int width)
+int	handle_char_width(char **output, char *flag, int width)
 {
 	if (ft_strchr(flag, 'c'))
 		if (!(**output) && width > 1)
@@ -27,10 +27,10 @@ int		handle_char_width(char **output, char *flag, int width)
 	return (width);
 }
 
-int		handle_char_output(char **output, char *flag, t_data *data)
+int	handle_char_output(char **output, char *flag, t_data *data)
 {
-	int width;
-	int i;
+	int	width;
+	int	i;
 
 	i = 0;
 	width = 1;

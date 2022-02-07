@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_format_flags.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/10 20:32:03 by sadawi           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:28:28 by vkuikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	handle_hashtag(char **output, char *flag)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = *output;
 	if (!(*output)[0] || (*output)[0] != '0')
@@ -32,7 +32,7 @@ void	handle_hashtag(char **output, char *flag)
 
 void	handle_plus(char **output, char *flag)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = *output;
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
@@ -47,7 +47,7 @@ void	handle_plus(char **output, char *flag)
 
 void	handle_space(char **output, char *flag)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = *output;
 	if (ft_strchr(flag, 'd') || ft_strchr(flag, 'i')
